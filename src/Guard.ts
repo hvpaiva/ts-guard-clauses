@@ -39,4 +39,18 @@ export class Guard {
 
     return input;
   }
+
+  public nullOrWhiteSpace(
+    input: any,
+    customMessage?: string,
+    exception?: Class<Error>,
+  ): any {
+    const message = `The value cannot be empty white space`;
+    Guard.against().nullOrEmpty(input, customMessage, exception);
+    if (typeof input === 'string' && input.trim() === '')
+      if (exception) throw new exception(customMessage ?? message);
+      else throw new ArgumentException(customMessage ?? message);
+
+    return input;
+  }
 }
