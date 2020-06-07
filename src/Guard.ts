@@ -1,5 +1,6 @@
-import { ArgumentException } from './Exceptions/ArgumentException';
-import { ArgumentNullException } from './Exceptions/ArgumentNullException';
+import { isAfter, isBefore } from 'date-fns';
+
+import { ArgumentNullException, ArgumentException } from './Exceptions';
 import { Class } from './utils';
 
 export class Guard {
@@ -8,7 +9,7 @@ export class Guard {
   private constructor() {}
 
   static against(): Guard {
-    if (!Guard._against) return new Guard();
+    if (!Guard._against) Guard._against = new Guard();
 
     return Guard._against;
   }
